@@ -1,57 +1,44 @@
 <?php
+ob_start();
+session_start();
 
-include('class.password.php');
+//database credentials
+define('DBHOST','localhost');
+define('DBUSER','root');
+define('DBPASS','');
+define('DBNAME','blog');
 
-class User extends Password{
+$db = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    private $db;
 
-	function __construct($db){
-		parent::__construct();
+//set timezone
+date_default_timezone_set('Europe/London');
 
-		$this->_db = $db;
+//load classes as needed
+function __autoload($class) {
+   
+   $class = strtolower($class);
+
+	//if call from within assets adjust the path
+   $classpath = 'classes/class.'.$class . '.php';
+   if ( file_exists($classpath)) {
+      require_once $classpath;
+	} 	
+	
+	//if call from within admin adjust the path
+   $classpath = '../classes/class.'.$class . '.php';
+   if ( file_exists($classpath)) {
+      require_once $classpath;
 	}
-
-	public function is_logged_in(){
-		if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
-			return true;
-		}
-	}
-
-	private function get_user_hash($username){
-
-		try {
-
-			$stmt = $this->_db->prepare('SELECT memberID, username, password FROM blog_members WHERE username = :username');
-			$stmt->execute(array('username' => $username));
-
-			return $stmt->fetch();
-
-		} catch(PDOException $e) {
-		    echo '<p class="error">'.$e->getMessage().'</p>';
-		}
-	}
-
-
-	public function login($username,$password){
-
-		$user = $this->get_user_hash($username);
-
-		if($this->password_verify($password,$user['password']) == 1){
-
-		    $_SESSION['loggedin'] = true;
-		    $_SESSION['memberID'] = $user['memberID'];
-		    $_SESSION['username'] = $user['username'];
-		    return true;
-		}
-	}
-
-
-	public function logout(){
-		session_destroy();
-	}
-
+	
+	//if call from within admin adjust the path
+   $classpath = '../../classes/class.'.$class . '.php';
+   if ( file_exists($classpath)) {
+      require_once $classpath;
+	} 		
+	 
 }
 
-
+$user = new User($db); 
 ?>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="style/normalize.css">
     <link rel="stylesheet" href="style/main.css">
 </head>
