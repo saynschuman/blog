@@ -2,8 +2,8 @@
 
 ## 1. make pull request
 
-## 2. import database
+## 2. start server
 
-## 3. start server
+## 3. import database
 
 ## 4. change hashed password in db.sql
