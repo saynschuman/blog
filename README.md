@@ -1,6 +1,6 @@
 # Blog
 
-## 1. make pull request
+## 1. git clone
 
 ## 2. start server
 
