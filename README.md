@@ -1,9 +1,4 @@
-# Blog
+Simple Blog part 1: The Build
+=============
 
-## 1. git clone
-
-## 2. start server
-
-## 3. import database
-
-## 4. change hashed password in db.sql
+These files acompany the tutorial: [Creating a blog from scratch with PHP](http://daveismyname.com/creating-a-blog-from-scratch-with-php-bp)

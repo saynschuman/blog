@@ -16,7 +16,7 @@ LOCK TABLES `blog_members` WRITE;
 
 INSERT INTO `blog_members` (`memberID`, `username`, `password`, `email`)
 VALUES
-  (1,'Demo','123','demo@demo.com');
+  (1,'Demo','$2y$10$wJxa1Wm0rtS2BzqKnoCPd.7QQzgu7D/aLlMR5Aw3O.m9jx3oRJ5R2','demo@demo.com');
 
 /*!40000 ALTER TABLE `blog_members` ENABLE KEYS */;
 UNLOCK TABLES;
