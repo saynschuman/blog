@@ -55,7 +55,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 					));
 
 				//redirect to index page
-					header('Location: table-added.php');
+					header('Location: tables.php');
 					exit;
 
 				} catch(PDOException $e) {
