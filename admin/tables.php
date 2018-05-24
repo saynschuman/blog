@@ -65,10 +65,10 @@ WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='blog'");
 	?>
 		<?php 
 while($row = $stmt->fetch()){
-					
+					$tn = $row['TABLE_NAME'];
 					echo '<tr>';
 						echo '<th>' . $row['TABLE_NAME'] . '</th>';		
-						echo "<th style='text-align:right'><button style='margin-right:7px'>show</button><button>Edit</button></th>";
+						echo '<th><a href="viewtable.php?tablename=' . $tn . '">' . 'view</a></th>';
 	
 					echo '</tr>';
 
@@ -82,7 +82,7 @@ while($row = $stmt->fetch()){
 <table>
 	
 
-	
+
 </table>
 
 

@@ -32,7 +32,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 	<?php include('menu.php');?>
 	<p><a href="./">Blog Admin Index</a></p>
 
-	<h2>Add Post</h2>
+	<h2>Add New Table</h2>
 
 	<?php
 
@@ -61,7 +61,30 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 
 			try {
 
+
 				//insert into database
+$titl = $_POST['postTitle'];
+
+				$stmt = $db->query('
+
+CREATE TABLE IF NOT EXISTS `'.$titl.'` (
+  `postID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `postTitle` varchar(255) DEFAULT NULL,
+  `postDesc` text,
+  `postCont` text,
+  `postDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`postID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1
+
+					');
+				$stmt = $db->prepare('INSERT INTO `'.$titl.'` (postTitle,postDesc,postCont,postDate) VALUES (:postTitle, :postDesc, :postCont, :postDate)') ;
+				$stmt->execute(array(
+					':postTitle' => $postTitle,
+					':postDesc' => $postDesc,
+					':postCont' => $postCont,
+					':postDate' => date('Y-m-d H:i:s')
+				));
+
 				$stmt = $db->prepare('INSERT INTO blog_posts (postTitle,postDesc,postCont,postDate) VALUES (:postTitle, :postDesc, :postCont, :postDate)') ;
 				$stmt->execute(array(
 					':postTitle' => $postTitle,
@@ -69,6 +92,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 					':postCont' => $postCont,
 					':postDate' => date('Y-m-d H:i:s')
 				));
+				
 
 				//redirect to index page
 				header('Location: index.php?action=added');

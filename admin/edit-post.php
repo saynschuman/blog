@@ -34,8 +34,8 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 
 	<h2>Edit Post</h2>
 
-
 	<?php
+	$titl = $GET['title'];
 
 	//if form has been submitted process it
 	if(isset($_POST['submit'])){
@@ -65,6 +65,16 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 		if(!isset($error)){
 
 			try {
+
+
+			
+
+		$stmt = $db->prepare('UPDATE `'.$postTitle.'` SET postTitle = :postTitle, postDesc = :postDesc, postCont = :postCont') ;
+				$stmt->execute(array(
+					':postTitle' => $postTitle,
+					':postDesc' => $postDesc,
+					':postCont' => $postCont
+				));
 
 				//insert into database
 				$stmt = $db->prepare('UPDATE blog_posts SET postTitle = :postTitle, postDesc = :postDesc, postCont = :postCont WHERE postID = :postID') ;
@@ -104,6 +114,9 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 			$stmt->execute(array(':postID' => $_GET['id']));
 			$row = $stmt->fetch(); 
 
+
+		
+
 		} catch(PDOException $e) {
 		    echo $e->getMessage();
 		}
@@ -114,7 +127,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 		<input type='hidden' name='postID' value='<?php echo $row['postID'];?>'>
 
 		<p><label>Title</label><br />
-		<input type='text' name='postTitle' value='<?php echo $row['postTitle'];?>'></p>
+		<input readonly="readonly" type='text' name='postTitle' value='<?php echo $row['postTitle'];?>'></p>
 
 		<p><label>Description</label><br />
 		<textarea name='postDesc' cols='60' rows='10'><?php echo $row['postDesc'];?></textarea></p>
@@ -123,6 +136,8 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 		<textarea name='postCont' cols='60' rows='10'><?php echo $row['postCont'];?></textarea></p>
 
 		<p><input type='submit' name='submit' value='Update'></p>
+
+
 
 	</form>
 

@@ -45,10 +45,11 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 
 				//insert into database
 					$stmt = $db->prepare("CREATE TABLE IF NOT EXISTS `".$postTitle."` (
-    `time` TIME DEFAULT NULL,
-    `value` INT(11) DEFAULT NULL,
-    PRIMARY KEY (`time`)
-) ENGINE = INNODB") ;
+  `catID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `catTitle` varchar(255) DEFAULT NULL,
+  `catSlug` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`catID`)
+") ;
 					$stmt->execute(array(
 						':name' => $postTitle
 					

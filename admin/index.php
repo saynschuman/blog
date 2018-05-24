@@ -11,6 +11,7 @@ if(isset($_GET['delpost'])){
 	$stmt = $db->prepare('DELETE FROM blog_posts WHERE postID = :postID') ;
 	$stmt->execute(array(':postID' => $_GET['delpost']));
 
+
 	header('Location: index.php?action=deleted');
 	exit;
 } 
@@ -65,11 +66,11 @@ if(isset($_GET['delpost'])){
 				?>
 
 				<td>
-					<a href="edit-post.php?id=<?php echo $row['postID'];?>">Edit</a> | 
-					<a href="javascript:delpost('<?php echo $row['postID'];?>','<?php echo $row['postTitle'];?>')">Delete</a>
+					<a href="/blog/viewpost.php?id=<?php echo $row['postID']?>">Show</a> |
+					<a href="edit-post.php?id=<?php echo $row['postID'];?>&title=<?php echo $row['postTitle'];?>">Edit</a>
 				</td>
-				
-				<?php 
+				<?php
+				$postT = $row['postTitle'];
 				echo '</tr>';
 
 			}
@@ -79,8 +80,6 @@ if(isset($_GET['delpost'])){
 		}
 	?>
 	</table>
-
-	<p><a href='add-post.php'>Add Post</a></p>
 
 </div>
 
