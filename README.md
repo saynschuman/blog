@@ -1,4 +1,9 @@
-Simple Blog part 1: The Build
-=============
+## Instructions
 
-These files acompany the tutorial: [Creating a blog from scratch with PHP](http://daveismyname.com/creating-a-blog-from-scratch-with-php-bp)
+## git clone https://github.com/saynschuman/blog.git
+
+## При додаванні статті, створюється нова таблиця, з полями заголовок, опис, контент.
+
+## Таблиця редагується разом із статтею.
+
+## Поля і назва таблиці мають бути англійською.
